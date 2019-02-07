@@ -10,7 +10,14 @@ class UserDefaultsManager {
     
     static var openingBalance : String {
         set { UserDefaults.standard.set(newValue, forKey: openingBalanceKey) }
-        get { return UserDefaults.standard.string(forKey: openingBalanceKey)! }
+        get {
+            if let opBal = UserDefaults.standard.string(forKey: openingBalanceKey) {
+                return opBal
+            } else {
+                self.openingBalance = ""
+                return UserDefaults.standard.string(forKey: openingBalanceKey)!
+            }
+        }
     }
     static var expandedFields : Bool {
         set { UserDefaults.standard.set(newValue, forKey: expandedFieldsKey) }
